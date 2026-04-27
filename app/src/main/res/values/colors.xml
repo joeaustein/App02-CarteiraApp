@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Brand Colors -->
+    <color name="primary">#1A1A2E</color>
+    <color name="primary_variant">#16213E</color>
+    <color name="secondary">#0F3460</color>
+    <color name="accent">#00D4AA</color>
+    <color name="accent_light">#33DDB8</color>
+    <color name="accent_dark">#00A884</color>
+
+    <!-- Surface Colors -->
+    <color name="background">#0D1117</color>
+    <color name="surface">#161B22</color>
+    <color name="surface_variant">#21262D</color>
+    <color name="surface_elevated">#2D333B</color>
+
+    <!-- Transaction Colors -->
+    <color name="credito_color">#00D4AA</color>
+    <color name="credito_bg">#0D2E29</color>
+    <color name="debito_color">#FF6B6B</color>
+    <color name="debito_bg">#2E1515</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#E6EDF3</color>
+    <color name="text_secondary">#8B949E</color>
+    <color name="text_disabled">#484F58</color>
+    <color name="text_on_accent">#0D1117</color>
+
+    <!-- UI Elements -->
+    <color name="divider">#21262D</color>
+    <color name="border">#30363D</color>
+    <color name="error">#FF6B6B</color>
+    <color name="saldo_positive">#00D4AA</color>
+    <color name="saldo_negative">#FF6B6B</color>
+
+    <!-- Legacy -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

@@ -1,9 +1,55 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.App02CarteiraApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.App02CarteiraApp" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorPrimaryVariant">@color/accent_dark</item>
+        <item name="colorOnPrimary">@color/text_on_accent</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorError">@color/error</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:navigationBarColor">@color/background</item>
     </style>
 
     <style name="Theme.App02CarteiraApp" parent="Base.Theme.App02CarteiraApp" />
+
+    <!-- Button Styles -->
+    <style name="Widget.Carteira.Button.Primary" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@color/accent</item>
+        <item name="android:textColor">@color/text_on_accent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="Widget.Carteira.Button.Danger" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@color/debito_color</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="Widget.Carteira.Button.Secondary" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:backgroundTint">@color/surface_variant</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <!-- EditText Style -->
+    <style name="Widget.Carteira.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/border</item>
+        <item name="boxBackgroundColor">@color/surface_variant</item>
+        <item name="hintTextColor">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_disabled</item>
+    </style>
+
+    <!-- Card Style -->
+    <style name="Widget.Carteira.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="strokeColor">@color/border</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
 </resources>

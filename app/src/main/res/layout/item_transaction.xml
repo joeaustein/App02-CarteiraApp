@@ -1,57 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@android:drawable/edit_text"
-    android:layout_margin="4dp">
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textViewDescricao"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Descrição"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textViewValor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="R$ 0,00"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/surface"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="8dp">
+        android:padding="16dp"
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/textViewTipo"
+        <!-- Left color indicator bar -->
+        <View
+            android:id="@+id/viewIndicator"
+            android:layout_width="4dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_indicator_credito"
+            android:layout_marginEnd="14dp" />
+
+        <!-- Content -->
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tipo"
-            android:textSize="14sp" />
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textViewDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descrição"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginBottom="4dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/textViewTipo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Crédito"
+                    android:textColor="@color/credito_color"
+                    android:textSize="12sp"
+                    android:background="@drawable/bg_badge_credito"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/textViewData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00/00/0000 00:00"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Valor -->
         <TextView
-            android:id="@+id/textViewData"
+            android:id="@+id/textViewValor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data"
-            android:textSize="14sp" />
+            android:text="R$ 0,00"
+            android:textColor="@color/credito_color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="12dp" />
 
     </LinearLayout>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

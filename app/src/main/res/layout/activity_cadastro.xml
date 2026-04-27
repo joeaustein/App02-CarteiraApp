@@ -1,106 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
     tools:context=".CadastroActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
-        <TextView
-            android:id="@+id/textViewTitulo"
+        <!-- Header -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nova Transação"
-            android:textSize="24sp"
-            android:gravity="center"
+            android:orientation="vertical"
             android:layout_marginBottom="32dp"
-            android:padding="8dp"
-            android:textStyle="bold" />
+            android:layout_marginTop="8dp">
 
-        <EditText
-            android:id="@+id/editTextValor"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Carteira"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/textViewTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nova Transação"
+                android:textColor="@color/text_primary"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02" />
+        </LinearLayout>
+
+        <!-- Valor Field -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VALOR"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:letterSpacing="0.15"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:hint="Valor (ex: 50.00)"
-            android:padding="12dp"
-            android:inputType="numberDecimal" />
+            android:background="@drawable/bg_input_field"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R$"
+                android:textColor="@color/accent"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:id="@+id/editTextValor"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="0,00"
+                android:textColorHint="@color/text_disabled"
+                android:textColor="@color/text_primary"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:background="@null"
+                android:inputType="numberDecimal"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <!-- Tipo (Débito / Crédito) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TIPO"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:letterSpacing="0.15"
+            android:layout_marginBottom="8dp" />
 
         <RadioGroup
             android:id="@+id/radioGroupTipo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="24dp"
-            android:gravity="center">
+            android:layout_marginBottom="24dp">
 
             <RadioButton
                 android:id="@+id/radioButtonDebito"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="52dp"
                 android:layout_weight="1"
                 android:text="Débito"
-                android:textSize="16sp"
-                android:padding="12dp" />
+                android:textSize="15sp"
+                android:textColor="@color/text_primary"
+                android:button="@null"
+                android:background="@drawable/bg_tipo_debito_selector"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:checked="true" />
 
             <RadioButton
                 android:id="@+id/radioButtonCredito"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="52dp"
                 android:layout_weight="1"
-                android:padding="12dp"
                 android:text="Crédito"
-                android:textSize="16sp" />
+                android:textSize="15sp"
+                android:textColor="@color/text_primary"
+                android:button="@null"
+                android:background="@drawable/bg_tipo_credito_selector"
+                android:gravity="center" />
 
         </RadioGroup>
+
+        <!-- Descrição Field -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DESCRIÇÃO"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:letterSpacing="0.15"
+            android:layout_marginBottom="8dp" />
 
         <EditText
             android:id="@+id/editTextDescricao"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:hint="Descrição da transação"
+            android:hint="Descreva a transação..."
+            android:textColorHint="@color/text_disabled"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
+            android:background="@drawable/bg_input_field"
             android:gravity="top"
             android:lines="4"
             android:maxLines="6"
             android:inputType="textMultiLine"
-            android:padding="12dp"
-            android:layout_marginBottom="32dp"
-            android:background="@android:drawable/editbox_background" />
+            android:padding="16dp"
+            android:layout_marginBottom="36dp" />
 
-        <LinearLayout
+        <!-- Salvar Button -->
+        <Button
+            android:id="@+id/btnSalvar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_height="56dp"
+            android:text="Salvar Transação"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_on_accent"
+            android:backgroundTint="@color/accent"
+            android:layout_marginBottom="12dp"
+            style="@style/Widget.Carteira.Button.Primary"
+            app:cornerRadius="14dp" />
 
-            <Button
-                android:id="@+id/btnSalvar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Salvar"
-                android:textSize="16sp"
-                android:padding="16dp"
-                android:layout_marginBottom="8dp" />
+        <!-- Excluir Button -->
+        <Button
+            android:id="@+id/btnExcluir"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Excluir Transação"
+            android:textSize="15sp"
+            android:textColor="@color/debito_color"
+            android:backgroundTint="@color/debito_bg"
+            android:visibility="gone"
+            app:cornerRadius="14dp"
+            tools:visibility="visible" />
 
-            <Button
-                android:id="@+id/btnExcluir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Excluir Transação"
-                android:textSize="16sp"
-                android:padding="16dp"
-                android:backgroundTint="#FF5252"
-                android:textColor="@android:color/white"
-                android:visibility="gone"
-                tools:visibility="visible" />
-
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>

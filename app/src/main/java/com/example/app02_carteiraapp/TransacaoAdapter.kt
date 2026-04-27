@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 class TransacaoAdapter(
@@ -16,6 +17,7 @@ class TransacaoAdapter(
         val txtValor: TextView = itemView.findViewById(R.id.textViewValor)
         val txtData: TextView = itemView.findViewById(R.id.textViewData)
         val txtTipo: TextView = itemView.findViewById(R.id.textViewTipo)
+        val viewIndicator: View = itemView.findViewById(R.id.viewIndicator)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransacaoViewHolder {
@@ -26,10 +28,27 @@ class TransacaoAdapter(
 
     override fun onBindViewHolder(holder: TransacaoViewHolder, position: Int) {
         val transacao = listaTransacoes[position]
+        val ctx = holder.itemView.context
+        val isCredito = transacao.tipo == "CREDITO"
+
         holder.txtDescricao.text = transacao.descricao
-        holder.txtValor.text = "R$ ${"%.2f".format(transacao.valor)}"
         holder.txtData.text = transacao.data
-        holder.txtTipo.text = if (transacao.tipo == "CREDITO") "Crédito" else "Débito"
+
+        if (isCredito) {
+            holder.txtValor.text = "+ R$ ${"%.2f".format(transacao.valor)}"
+            holder.txtValor.setTextColor(ContextCompat.getColor(ctx, R.color.credito_color))
+            holder.txtTipo.text = "Crédito"
+            holder.txtTipo.setTextColor(ContextCompat.getColor(ctx, R.color.credito_color))
+            holder.txtTipo.background = ContextCompat.getDrawable(ctx, R.drawable.bg_badge_credito)
+            holder.viewIndicator.background = ContextCompat.getDrawable(ctx, R.drawable.bg_indicator_credito)
+        } else {
+            holder.txtValor.text = "- R$ ${"%.2f".format(transacao.valor)}"
+            holder.txtValor.setTextColor(ContextCompat.getColor(ctx, R.color.debito_color))
+            holder.txtTipo.text = "Débito"
+            holder.txtTipo.setTextColor(ContextCompat.getColor(ctx, R.color.debito_color))
+            holder.txtTipo.background = ContextCompat.getDrawable(ctx, R.drawable.bg_badge_debito)
+            holder.viewIndicator.background = ContextCompat.getDrawable(ctx, R.drawable.bg_indicator_debito)
+        }
 
         holder.itemView.setOnClickListener {
             aoClicarNoItem(transacao)
