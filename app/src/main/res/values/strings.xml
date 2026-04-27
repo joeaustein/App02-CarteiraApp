@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">App02-CarteiraApp</string>
+    <string name="app_name">Minha Carteira</string>
+    <string name="btn_salvar">Salvar</string>
+    <string name="btn_excluir">Excluir Transação</string>
+    <string name="btn_nova_transacao">+ Nova Transação</string>
+    <string name="btn_sair">Sair</string>
+    <string name="hint_valor">Valor (ex: 50.00)</string>
+    <string name="hint_descricao">Descrição da transação</string>
+    <string name="hint_busca">Buscar por descrição...</string>
+    <string name="label_todos">Todos</string>
+    <string name="label_creditos">Créditos</string>
+    <string name="label_debitos">Débitos</string>
+    <string name="titulo_editar">Editar Transação</string>
+    <string name="titulo_novo">Nova Transação</string>
+    <string name="msg_confirmar_exclusao">Deseja realmente excluir esta transação?</string>
 </resources>
