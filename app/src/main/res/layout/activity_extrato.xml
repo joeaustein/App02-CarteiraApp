@@ -29,10 +29,20 @@
         android:padding="12dp"
         android:background="#f0f0f0" />
 
+    <EditText
+        android:id="@+id/editTextBusca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Buscar por descrição..."
+        android:padding="12dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:drawable/editbox_background"
+        android:drawableStart="@android:drawable/ic_menu_search" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Filtrar por:"
+        android:text="Filtrar por tipo:"
         android:textSize="16sp"
         android:layout_marginBottom="8dp" />
 
