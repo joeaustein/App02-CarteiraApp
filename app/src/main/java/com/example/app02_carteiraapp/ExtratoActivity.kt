@@ -1,7 +1,10 @@
 package com.example.app02_carteiraapp
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +17,9 @@ class ExtratoActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var textViewSaldo: TextView
     private lateinit var radioGroupFiltro: RadioGroup
-    private lateinit var adapter: TransactionAdapter
+    private lateinit var editTextBusca: EditText
+    private lateinit var adapter: TransacaoAdapter
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_extrato)
@@ -26,51 +29,59 @@ class ExtratoActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerViewTransactions)
         textViewSaldo = findViewById(R.id.textViewSaldo)
         radioGroupFiltro = findViewById(R.id.radioGroupFiltro)
+        editTextBusca = findViewById(R.id.editTextBusca)
 
         setupRecyclerView()
-        updateSaldo()
-
-
-        radioGroupFiltro.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.radioTodos -> showAllTransactions()
-                R.id.radioCreditos -> showCreditos()
-                R.id.radioDebitos -> showDebitos()
-            }
-        }
-    }
-
-    private fun showAllTransactions() {
-        val transactions = dbHelper.getAllTransactions()
-        adapter = TransactionAdapter(transactions)
-        recyclerView.adapter = adapter
-    }
-
-    private fun showCreditos() {
-        val transactions = dbHelper.getCreditos()
-        adapter = TransactionAdapter(transactions)
-        recyclerView.adapter = adapter
-    }
-
-    private fun showDebitos() {
-        val transactions = dbHelper.getDebitos()
-        adapter = TransactionAdapter(transactions)
-        recyclerView.adapter = adapter
+        setupListeners()
+        atualizarResumo()
     }
 
     private fun setupRecyclerView() {
-        showAllTransactions()
+        adapter = TransacaoAdapter(dbHelper.buscarTodasAsTransacoes()) { transacao ->
+            val intent = Intent(this, CadastroActivity::class.java)
+            intent.putExtra("TRANSACAO_EDITAR", transacao)
+            startActivity(intent)
+        }
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
     }
 
-    private fun updateSaldo() {
-        val saldo = dbHelper.getSaldoTotal()
+    private fun setupListeners() {
+        radioGroupFiltro.setOnCheckedChangeListener { _, checkedId ->
+            filtrar()
+        }
+
+        editTextBusca.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filtrar()
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
+    private fun filtrar() {
+        val busca = editTextBusca.text.toString()
+        val listaFiltrada = if (busca.isNotEmpty()) {
+            dbHelper.buscarTransacaoPorDescricao(busca)
+        } else {
+            when (radioGroupFiltro.checkedRadioButtonId) {
+                R.id.radioCreditos -> dbHelper.buscarTransacoesPorTipo("CREDITO")
+                R.id.radioDebitos -> dbHelper.buscarTransacoesPorTipo("DEBITO")
+                else -> dbHelper.buscarTodasAsTransacoes()
+            }
+        }
+        adapter.atualizarLista(listaFiltrada)
+    }
+
+    private fun atualizarResumo() {
+        val saldo = dbHelper.obterSaldoTotal()
         textViewSaldo.text = "Saldo: R$ ${"%.2f".format(saldo)}"
     }
 
     override fun onResume() {
         super.onResume()
-        setupRecyclerView()
-        updateSaldo()
+        filtrar()
+        atualizarResumo()
     }
 }
