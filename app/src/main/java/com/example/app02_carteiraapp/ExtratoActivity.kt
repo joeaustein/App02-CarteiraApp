@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ExtratoActivity : AppCompatActivity() {
 
-    private lateinit var dbHelper: DBHelper
+    private lateinit var transacaoDAO: TransacaoDAO
     private lateinit var recyclerView: RecyclerView
     private lateinit var textViewSaldo: TextView
     private lateinit var radioGroupFiltro: RadioGroup
@@ -24,7 +24,7 @@ class ExtratoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_extrato)
 
-        dbHelper = DBHelper(this)
+        transacaoDAO = TransacaoDAO(this)
 
         recyclerView = findViewById(R.id.recyclerViewTransactions)
         textViewSaldo = findViewById(R.id.textViewSaldo)
@@ -37,7 +37,7 @@ class ExtratoActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        adapter = TransacaoAdapter(dbHelper.buscarTodasAsTransacoes()) { transacao ->
+        adapter = TransacaoAdapter(transacaoDAO.buscarTodas()) { transacao ->
             val intent = Intent(this, CadastroActivity::class.java)
             intent.putExtra("TRANSACAO_EDITAR", transacao)
             startActivity(intent)
@@ -63,19 +63,19 @@ class ExtratoActivity : AppCompatActivity() {
     private fun filtrar() {
         val busca = editTextBusca.text.toString()
         val listaFiltrada = if (busca.isNotEmpty()) {
-            dbHelper.buscarTransacaoPorDescricao(busca)
+            transacaoDAO.buscarPorDescricao(busca)
         } else {
             when (radioGroupFiltro.checkedRadioButtonId) {
-                R.id.radioCreditos -> dbHelper.buscarTransacoesPorTipo("CREDITO")
-                R.id.radioDebitos -> dbHelper.buscarTransacoesPorTipo("DEBITO")
-                else -> dbHelper.buscarTodasAsTransacoes()
+                R.id.radioCreditos -> transacaoDAO.buscarPorTipo("CREDITO")
+                R.id.radioDebitos -> transacaoDAO.buscarPorTipo("DEBITO")
+                else -> transacaoDAO.buscarTodas()
             }
         }
         adapter.atualizarLista(listaFiltrada)
     }
 
     private fun atualizarResumo() {
-        val saldo = dbHelper.obterSaldoTotal()
+        val saldo = transacaoDAO.obterSaldo()
         textViewSaldo.text = "Saldo: R$ ${"%.2f".format(saldo)}"
     }
 
