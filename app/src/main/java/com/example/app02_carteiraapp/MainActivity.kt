@@ -10,6 +10,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -97,6 +98,13 @@ class MainActivity : AppCompatActivity() {
     private fun atualizarResumo() {
         val saldo = transacaoDAO.obterSaldo()
         textViewSaldo.text = "Saldo: R$ ${"%.2f".format(saldo)}"
+        
+        val corSaldo = if (saldo < 0) {
+            ContextCompat.getColor(this, R.color.saldo_negative)
+        } else {
+            ContextCompat.getColor(this, R.color.saldo_positive)
+        }
+        textViewSaldo.setTextColor(corSaldo)
     }
 
     override fun onResume() {
